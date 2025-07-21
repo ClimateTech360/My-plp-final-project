@@ -5,61 +5,67 @@ def get_kenya_mental_health_resources():
         'professional': [
             {
                 'title': 'Kenya Association of Professional Counsellors (KAPC)',
-                'description': 'Find licensed counsellors and therapists across Kenya. Offers directory of qualified mental health professionals.',
-                'website': 'https://kapc.or.ke',
-                'phone': '+254 20 2723186'
+                'description': 'Find licensed counsellors and therapists across Kenya. Established in 1990, provides professional counseling training and services.',
+                'website': 'https://www.kapc.or.ke',
+                'phone': '+254 20 3741051',
+                'helpline': '0800 724 263 (Toll-Free)',
+                'email': 'nairobi@kapc.or.ke'
             },
             {
-                'title': 'Chiromo Hospital Group',
-                'description': 'Specialized psychiatric and mental health services with locations in Nairobi, Mombasa, and other major cities.',
-                'website': 'https://chiromo.co.ke',
-                'phone': '+254 20 2717117'
+                'title': 'Mathari National Teaching and Referral Hospital',
+                'description': 'Kenya\'s largest psychiatric hospital with over 500 beds, providing specialized mental health services, training and research.',
+                'website': 'https://mntrh.go.ke',
+                'phone': '+254 20 2337694',
+                'email': 'info@mntrh.go.ke'
             },
             {
-                'title': 'Mathare National Teaching and Referral Hospital',
-                'description': 'Kenya\'s premier psychiatric hospital providing comprehensive mental health services and training.',
-                'website': 'https://mathare.go.ke',
-                'phone': '+254 20 2728901'
+                'title': 'Kenya Red Cross - Psychosocial Support',
+                'description': 'Emergency psychosocial support services and community mental health programs nationwide.',
+                'website': 'https://www.redcross.or.ke',
+                'phone': '+254 20 3950000',
+                'emergency': '1199 (Toll-Free on Safaricom)',
+                'email': 'info@redcross.or.ke'
             },
             {
-                'title': 'Nairobi Women\'s Hospital - Mental Health',
-                'description': 'Comprehensive mental health services with focus on women and family mental health.',
-                'website': 'https://nairobiwomens.org',
-                'phone': '+254 20 2845000'
+                'title': 'Kenyatta National Hospital - Mental Health',
+                'description': 'National referral hospital with comprehensive psychiatric services and youth mental health center.',
+                'website': 'https://knh.or.ke',
+                'phone': '+254 20 2726300',
+                'youth_center': 'Free services every Tuesday 8am-4pm (ages 25 and under)'
             },
             {
-                'title': 'Mind Your Mind Kenya',
-                'description': 'Online therapy platform connecting Kenyans with licensed therapists for video and phone sessions.',
-                'website': 'https://mindyourmindkenya.com',
-                'phone': '+254 700 123456'
+                'title': 'Moi Teaching and Referral Hospital - Eldoret',
+                'description': 'Regional referral hospital with psychiatric services covering Western Kenya region.',
+                'website': 'https://mtrh.go.ke',
+                'phone': '+254 53 2063300'
             }
         ],
         
         'educational': [
             {
                 'title': 'Ministry of Health - Mental Health Division',
-                'description': 'Official government resource for mental health policies, programs, and information in Kenya.',
-                'website': 'https://health.go.ke/mental-health'
+                'description': 'Official government resource for mental health policies, programs, and the Kenya Mental Health Action Plan 2021-2025.',
+                'website': 'https://mental.health.go.ke'
             },
             {
-                'title': 'Kenya Mental Health Association',
-                'description': 'Non-profit organization promoting mental health awareness and providing educational resources.',
-                'website': 'https://kenyamentalhealthassociation.org'
+                'title': 'Kenya Association of Professional Counsellors (KAPC)',
+                'description': 'Professional training institution offering certificate to diploma level counseling courses and resources.',
+                'website': 'https://www.kapc.or.ke'
             },
             {
-                'title': 'African Mental Health Research Initiative (AMARI)',
-                'description': 'Research and educational resources on mental health in African contexts, based in Kenya.',
-                'website': 'https://amari.ac.ke'
+                'title': 'What\'s Eating My Mind',
+                'description': 'Mental health awareness platform providing educational content and emergency resources for Kenya.',
+                'website': 'https://www.whatseatingmymind.com'
             },
             {
-                'title': 'University of Nairobi - Department of Psychiatry',
-                'description': 'Academic resources and research on mental health from Kenya\'s leading university.',
-                'website': 'https://psychiatry.uonbi.ac.ke'
+                'title': 'Speak Up Kenya',
+                'description': 'Mental health advocacy organization providing educational resources and crisis support information.',
+                'website': 'https://speakup.co.ke'
             },
             {
-                'title': 'Befrienders Kenya',
-                'description': 'Volunteer-based organization providing emotional support and suicide prevention resources.',
-                'website': 'https://befrienders.or.ke'
+                'title': 'Mathari National Teaching and Referral Hospital',
+                'description': 'Kenya\'s premier psychiatric hospital providing training, research, and educational resources.',
+                'website': 'https://mntrh.go.ke'
             }
         ],
         
@@ -159,68 +165,77 @@ def get_kenya_crisis_resources():
     crisis_resources = {
         'immediate': [
             {
-                'name': 'Kenya Emergency Helpline',
-                'phone': '999',
-                'website': 'https://www.emergencykenya.go.ke',
-                'description': 'National emergency services for immediate medical or psychiatric emergencies.'
+                'name': 'Kenya Red Cross Emergency',
+                'phone': '1199 (Toll-Free on Safaricom)',
+                'alternative': '+254 703 037 000',
+                'website': 'https://www.redcross.or.ke',
+                'description': '24/7 emergency services including mental health crisis support.'
             },
             {
                 'name': 'Befrienders Kenya Crisis Line',
                 'phone': '+254 722 178 177',
-                'website': 'https://befrienders.or.ke',
-                'description': '24/7 emotional support and suicide prevention hotline staffed by trained volunteers.'
+                'alternative': '+254 736 542 304',
+                'website': 'https://befrienders.org/find-support-now/befrienders-kenya/',
+                'email': 'befrienderskenya@gmail.com',
+                'description': 'Free confidential emotional support and suicide prevention. Monday-Friday 9am-5pm.',
+                'address': 'La Colline Gardens, Masaba Road, Upper Hill, Nairobi'
             },
             {
-                'name': 'Kenya Red Cross Emergency Response',
-                'phone': '+254 703 037 000',
-                'website': 'https://kenyaredcross.org',
-                'description': 'Emergency psychosocial support and crisis intervention.'
+                'name': 'EMKF Suicide Prevention Hotline',
+                'phone': '0800 723 253',
+                'website': 'https://speakup.co.ke',
+                'description': 'Free nationwide suicide prevention hotline operated by trained counselors.'
             },
             {
-                'name': 'USIU Mental Health Crisis Line',
-                'phone': '+254 731 999 999',
-                'website': 'https://usiu.ac.ke/student-affairs/counselling',
-                'description': 'University-based crisis support available to the community.'
+                'name': 'Niskize Crisis Center',
+                'phone': '0900 620 800',
+                'alternative': '+254 718 227 440',
+                'website': 'https://www.whatseatingmymind.com',
+                'description': '24-hour crisis intervention and suicide prevention services.'
             },
             {
-                'name': 'Suicide Prevention Kenya',
-                'phone': '+254 722 716 701',
-                'text': 'WhatsApp: +254 722 716 701',
-                'website': 'https://suicidepreventionkenya.org',
-                'description': 'Specialized suicide prevention hotline with trained counsellors.'
+                'name': 'Mental 360 Youth Line',
+                'phone': '+254 776 543 099',
+                'website': 'https://mental360.co.ke',
+                'description': '24/7 mental health support specifically for people aged 25 and under.'
             },
             {
-                'name': 'Mental Health Kenya Helpline',
-                'phone': '+254 725 961 313',
-                'website': 'https://mentalhealthkenya.org',
-                'description': 'Mental health crisis support and referrals to professional services.'
+                'name': 'CBT Kenya Crisis Support',
+                'phone': '+254 739 935 333',
+                'alternative': '+254 756 454 585',
+                'website': 'https://cbtkenya.org',
+                'description': 'Crisis counseling and cognitive behavioral therapy support.'
             }
         ],
         
         'regional': [
             {
-                'name': 'Nairobi Crisis Center',
-                'region': 'Nairobi',
-                'phone': '+254 20 2723405',
-                'address': 'Nairobi Hospital, Argwings Kodhek Road'
+                'name': 'KAPC Nairobi Branch',
+                'region': 'Nairobi County',
+                'phone': '+254 20 3741051',
+                'mobile': '+254 721 296912',
+                'address': '2nd Floor, Kalson Towers, The Crescent, Off Parklands Road'
             },
             {
-                'name': 'Mombasa Mental Health Services',
-                'region': 'Coast',
-                'phone': '+254 41 2314502',
-                'address': 'Coast General Hospital, Mombasa'
+                'name': 'KAPC Mombasa Branch',
+                'region': 'Coast Region',
+                'phone': '+254 41 2493050',
+                'mobile': '+254 725 797888',
+                'address': 'Kenyatta Avenue, Narok Rd, Mombasa Real Estate Building'
             },
             {
-                'name': 'Kisumu Mental Health Unit',
+                'name': 'KAPC Kisumu Branch',
                 'region': 'Western Kenya',
-                'phone': '+254 57 2023902',
-                'address': 'Jaramogi Oginga Odinga Teaching & Referral Hospital'
+                'phone': '+254 57 2027071',
+                'mobile': '+254 733 868610',
+                'address': 'Mamboleo Junction, off Kakamega Road'
             },
             {
-                'name': 'Eldoret Mental Health Services',
+                'name': 'KAPC Eldoret Branch',
                 'region': 'Rift Valley',
-                'phone': '+254 53 2063300',
-                'address': 'Moi Teaching and Referral Hospital'
+                'phone': '+254 53 2030682',
+                'mobile': '+254 712 141272',
+                'address': 'Rehema Complex, Ronald Ngala Street'
             }
         ],
         
