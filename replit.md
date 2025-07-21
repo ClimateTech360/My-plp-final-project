@@ -2,7 +2,7 @@
 
 ## Overview
 
-WellNet is a comprehensive AI-powered mental health sentiment analysis system that includes both a Streamlit web application and a Flask REST API. The system analyzes text for emotional distress indicators and provides mental health resources. It uses advanced natural language processing to identify potential mental health concerns in user-provided text and connects users with appropriate support resources. This is an educational and awareness tool supporting SDG 3 (Good Health and Well-being) and SDG 16 (Peace, Justice and Strong Institutions), not a replacement for professional mental health care.
+WellNet Kenya is a comprehensive AI-powered mental health sentiment analysis system specifically designed for Kenya, including both a Streamlit web application and a Flask REST API. The system analyzes text for emotional distress indicators and provides Kenya-specific mental health resources. It uses advanced natural language processing to identify potential mental health concerns in user-provided text (including Swahili and local language phrases) and connects users with appropriate Kenyan support resources. This is an educational and awareness tool supporting SDG 3 (Good Health and Well-being) and SDG 16 (Peace, Justice and Strong Institutions) across all 47 counties of Kenya, not a replacement for professional mental health care.
 
 ## Recent Changes (July 2025)
 
@@ -13,6 +13,10 @@ WellNet is a comprehensive AI-powered mental health sentiment analysis system th
 ✓ **Production Security**: Rate limiting, CORS configuration, and security headers implemented
 ✓ **Batch Analysis**: Support for analyzing up to 50 texts simultaneously via API
 ✓ **Enhanced Error Handling**: Robust error handling and logging across all endpoints
+✓ **Kenya Localization**: Complete adaptation for Kenya with local mental health resources
+✓ **Professional Header Component**: Custom header with Kenya flag, crisis hotlines, and branding
+✓ **Cultural Context**: Kenya-specific sample posts, Swahili translations, and local healing practices
+✓ **47-County Coverage**: Resources mapped to all Kenyan counties with regional crisis centers
 
 ## User Preferences
 

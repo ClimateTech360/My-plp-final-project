@@ -9,11 +9,17 @@ import time
 from sentiment_analyzer import SentimentAnalyzer
 from mental_health_resources import get_mental_health_resources
 from crisis_resources import get_crisis_resources
+from kenya_mental_health_resources import (
+    get_kenya_mental_health_resources, 
+    get_kenya_crisis_resources, 
+    get_kenya_safety_planning_resources
+)
+from components.header import render_header, render_kenya_banner, render_sdg_banner
 
 # Page configuration
 st.set_page_config(
-    page_title="WellNet - Mental Health Sentiment Analysis",
-    page_icon="🧠",
+    page_title="WellNet Kenya - Mental Health Sentiment Analysis",
+    page_icon="🇰🇪",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -29,17 +35,10 @@ analyzer = load_analyzer()
 if 'analysis_history' not in st.session_state:
     st.session_state.analysis_history = []
 
-# Main header
-st.title("🧠 WellNet - Mental Health Sentiment Analysis")
-st.markdown("""
-<div style="background-color: #F0F8FF; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-    <h3 style="color: #2E86AB; margin-top: 0;">Supporting Mental Health and Well-being</h3>
-    <p style="margin-bottom: 0;">
-        WellNet analyzes text for emotional distress indicators and provides supportive resources. 
-        This tool is designed to promote early mental health awareness and connect users with professional support.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+# Render header components
+render_header()
+render_kenya_banner()
+render_sdg_banner()
 
 # Important disclaimers
 with st.expander("⚠️ Important Disclaimers and Privacy Information", expanded=False):
@@ -65,22 +64,25 @@ with st.expander("⚠️ Important Disclaimers and Privacy Information", expande
 
 # Sidebar for crisis resources
 with st.sidebar:
-    st.header("🆘 Crisis Support")
-    crisis_resources = get_crisis_resources()
+    st.header("🆘 Crisis Support - Kenya")
+    crisis_resources = get_kenya_crisis_resources()
     
-    st.markdown("### Immediate Help")
+    st.markdown("### Immediate Help (Msaada wa Haraka)")
     for resource in crisis_resources['immediate']:
         st.markdown(f"**{resource['name']}**")
         st.markdown(f"📞 {resource['phone']}")
         if resource.get('text'):
-            st.markdown(f"📱 Text: {resource['text']}")
+            st.markdown(f"📱 {resource['text']}")
         st.markdown(f"🌐 [{resource['website']}]({resource['website']})")
+        st.markdown(f"*{resource['description']}*")
         st.markdown("---")
     
-    st.markdown("### International Resources")
-    for resource in crisis_resources['international']:
-        st.markdown(f"**{resource['name']}** ({resource['country']})")
+    st.markdown("### Regional Centers")
+    for resource in crisis_resources['regional']:
+        st.markdown(f"**{resource['name']}** ({resource['region']})")
         st.markdown(f"📞 {resource['phone']}")
+        if resource.get('address'):
+            st.markdown(f"📍 {resource['address']}")
         st.markdown("---")
 
 # Main content area
@@ -103,14 +105,16 @@ with col1:
             placeholder="Share your thoughts, feelings, or any text you'd like to analyze for emotional indicators..."
         )
     else:
-        # Sample posts for demonstration
+        # Sample posts for demonstration - Kenya context
         sample_posts = [
-            "I've been feeling really overwhelmed lately. Everything seems too much to handle.",
-            "Had a great day at the park with friends! Feeling grateful for good weather.",
-            "Can't sleep again. These racing thoughts won't stop. I feel so alone.",
-            "Just got promoted at work! Hard work really does pay off sometimes.",
-            "I don't see the point in anything anymore. Nothing brings me joy.",
-            "Meditation really helped me today. Feeling more centered and peaceful."
+            "I've been feeling really overwhelmed with life in Nairobi. Everything seems too expensive and stressful.",
+            "Had a wonderful day at Uhuru Park with my family! Feeling blessed and grateful.",
+            "Can't sleep again thinking about my job situation. I feel so alone in this big city.",
+            "Just got a new job opportunity! Hard work and prayer really pay off.",
+            "I don't see the point in anything anymore. Life feels hopeless since I moved to town.",
+            "Attending prayers at church really helped me today. Feeling more at peace.",
+            "Kuna stress sana with this economy. I don't know how to cope anymore.",
+            "Family time in shags always makes me feel better. Rural life has its peace."
         ]
         
         selected_sample = st.selectbox(
@@ -292,15 +296,22 @@ with col2:
     else:
         st.info("No analysis history yet. Start by analyzing some text!")
 
-# Mental Health Resources Section
-st.header("🌟 Mental Health Resources")
+# Mental Health Resources Section - Kenya Focused
+st.header("🌟 Mental Health Resources in Kenya")
 
-resources = get_mental_health_resources()
+resources = get_kenya_mental_health_resources()
 
-tab1, tab2, tab3, tab4 = st.tabs(["🏥 Professional Help", "📚 Educational", "🧘 Self-Care", "👥 Support Groups"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "🏥 Professional Help", 
+    "📚 Educational", 
+    "🧘 Self-Care", 
+    "👥 Support Groups",
+    "🏘️ Community Resources"
+])
 
 with tab1:
-    st.subheader("Professional Mental Health Services")
+    st.subheader("Professional Mental Health Services in Kenya")
+    st.info("Find qualified mental health professionals across Kenya's 47 counties")
     for resource in resources['professional']:
         with st.expander(resource['title']):
             st.write(resource['description'])
@@ -310,7 +321,8 @@ with tab1:
                 st.markdown(f"📞 {resource['phone']}")
 
 with tab2:
-    st.subheader("Educational Resources")
+    st.subheader("Educational Resources - Kenya")
+    st.info("Learn about mental health from trusted Kenyan and African sources")
     for resource in resources['educational']:
         with st.expander(resource['title']):
             st.write(resource['description'])
@@ -318,27 +330,47 @@ with tab2:
                 st.markdown(f"🌐 [Learn More]({resource['website']})")
 
 with tab3:
-    st.subheader("Self-Care and Coping Strategies")
+    st.subheader("Self-Care and Healing - African Approach")
+    st.info("Culturally appropriate self-care practices for Kenyans")
     for resource in resources['self_care']:
         with st.expander(resource['title']):
             st.write(resource['description'])
             if resource.get('website'):
-                st.markdown(f"🌐 [Try It]({resource['website']})")
+                st.markdown(f"🌐 [Explore]({resource['website']})")
 
 with tab4:
     st.subheader("Support Groups and Communities")
+    st.info("Connect with others facing similar challenges across Kenya")
     for resource in resources['support_groups']:
         with st.expander(resource['title']):
             st.write(resource['description'])
             if resource.get('website'):
                 st.markdown(f"🌐 [Join Community]({resource['website']})")
+            if resource.get('phone'):
+                st.markdown(f"📞 {resource['phone']}")
 
-# Footer
+with tab5:
+    st.subheader("Community and Cultural Resources")
+    st.info("Local community support including faith-based and traditional healing")
+    for resource in resources['community_resources']:
+        with st.expander(resource['title']):
+            st.write(resource['description'])
+            if resource.get('website'):
+                st.markdown(f"🌐 [Learn More]({resource['website']})")
+            if resource.get('phone'):
+                st.markdown(f"📞 {resource['phone']}")
+
+# Footer - Kenya Context
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #666; padding: 20px;">
-    <p><strong>WellNet - Mental Health Sentiment Analysis Tool</strong></p>
-    <p>Supporting SDG 3 (Good Health and Well-being) and SDG 16 (Peace, Justice and Strong Institutions)</p>
-    <p>Remember: You are not alone. Help is always available.</p>
+<div style="text-align: center; color: #666; padding: 20px; background: linear-gradient(90deg, #000 0%, #ce1126 50%, #007a3d 100%); color: white; border-radius: 10px;">
+    <p><strong>🇰🇪 WellNet Kenya - Mental Health Sentiment Analysis Tool</strong></p>
+    <p><em>Chombo cha Uchambuzi wa Hali ya Afya ya Akili</em></p>
+    <p>Supporting SDG 3 (Good Health and Well-being) and SDG 16 (Peace, Justice and Strong Institutions) in Kenya</p>
+    <p><strong>Kumbuka: Haupo peke yako. Msaada unapatikana kila wakati.</strong></p>
+    <p style="font-size: 0.9rem; margin-top: 1rem;">
+        🏥 Ministry of Health Kenya | 🤝 Kenya Mental Health Association | 
+        📞 Crisis Line: +254 722 178 177
+    </p>
 </div>
 """, unsafe_allow_html=True)

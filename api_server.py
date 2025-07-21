@@ -7,6 +7,11 @@ import logging
 from sentiment_analyzer import SentimentAnalyzer
 from mental_health_resources import get_mental_health_resources
 from crisis_resources import get_crisis_resources, get_safety_planning_resources
+from kenya_mental_health_resources import (
+    get_kenya_mental_health_resources,
+    get_kenya_crisis_resources,
+    get_kenya_safety_planning_resources
+)
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -79,13 +84,14 @@ def analyze_text():
 
 @app.route('/api/resources/crisis', methods=['GET'])
 def get_crisis_help():
-    """Get crisis intervention resources."""
+    """Get crisis intervention resources - Kenya focused."""
     try:
-        crisis_resources = get_crisis_resources()
+        crisis_resources = get_kenya_crisis_resources()
         
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
+            'country': 'Kenya',
             'resources': crisis_resources
         })
         
@@ -98,13 +104,14 @@ def get_crisis_help():
 
 @app.route('/api/resources/mental-health', methods=['GET'])
 def get_mental_health_help():
-    """Get mental health resources."""
+    """Get mental health resources - Kenya focused."""
     try:
-        resources = get_mental_health_resources()
+        resources = get_kenya_mental_health_resources()
         
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
+            'country': 'Kenya',
             'resources': resources
         })
         
@@ -117,13 +124,14 @@ def get_mental_health_help():
 
 @app.route('/api/resources/safety-planning', methods=['GET'])
 def get_safety_help():
-    """Get safety planning resources."""
+    """Get safety planning resources - Kenya focused."""
     try:
-        safety_resources = get_safety_planning_resources()
+        safety_resources = get_kenya_safety_planning_resources()
         
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
+            'country': 'Kenya',
             'resources': safety_resources
         })
         
@@ -262,9 +270,11 @@ def generate_recommendations(risk_level):
 def api_documentation():
     """API documentation endpoint."""
     docs = {
-        'title': 'WellNet Mental Health API',
+        'title': 'WellNet Kenya Mental Health API',
         'version': '1.0.0',
-        'description': 'API for mental health sentiment analysis and resource access',
+        'description': 'API for mental health sentiment analysis and Kenya-specific resource access',
+        'country': 'Kenya',
+        'languages': ['English', 'Swahili', 'Local Languages'],
         'endpoints': {
             '/api/health': {
                 'method': 'GET',
@@ -338,7 +348,8 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
-    print("🧠 Starting WellNet Mental Health API Server...")
+    print("🇰🇪 Starting WellNet Kenya Mental Health API Server...")
     print("📋 API Documentation: http://localhost:3000/api/documentation")
     print("🚀 Server running on http://localhost:3000")
+    print("🏥 Serving Kenya's 47 counties with mental health support")
     app.run(host='0.0.0.0', port=3000, debug=True)
