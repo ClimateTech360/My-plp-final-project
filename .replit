@@ -2,6 +2,7 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["glibcLocales"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -23,6 +24,10 @@ args = "Streamlit Server"
 task = "workflow.run"
 args = "install_dependencies"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Flask API Server"
+
 [[workflows.workflow]]
 name = "Streamlit Server"
 author = "agent"
@@ -39,6 +44,18 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "uv add textblob vadersentiment plotly spacy"
+
+[[workflows.workflow]]
+name = "Flask API Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python api_server.py"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
 
 [[ports]]
 localPort = 5000
