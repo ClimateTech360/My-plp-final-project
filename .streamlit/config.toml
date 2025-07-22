@@ -2,7 +2,8 @@
 headless = true
 address = "0.0.0.0"
 port = 5000
-enableWatchdog = false  # Optional: prevents unnecessary reloads
+enableXsrfProtection = false  # 👈 Add this line
+enableCORS = false            # 👈 Only works if XSRF protection is off
 
 [theme]
 primaryColor = "#4CAF50"

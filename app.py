@@ -1,3 +1,6 @@
+import os
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"  # Disables file watcher to prevent reload issues
+
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
