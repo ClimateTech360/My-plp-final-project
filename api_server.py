@@ -24,6 +24,7 @@ analyzer = SentimentAnalyzer()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint."""
@@ -33,35 +34,36 @@ def health_check():
         'service': 'WellNet Mental Health API'
     })
 
+
 @app.route('/api/analyze', methods=['POST'])
 def analyze_text():
     """Analyze text for mental health sentiment."""
     try:
         data = request.get_json()
-        
+
         if not data or 'text' not in data:
             return jsonify({
                 'error': 'Text field is required',
                 'status': 'error'
             }), 400
-        
+
         text = data['text']
-        
+
         if not text or not text.strip():
             return jsonify({
                 'error': 'Text cannot be empty',
                 'status': 'error'
             }), 400
-        
+
         # Perform sentiment analysis
         analysis_result = analyzer.analyze_text(text)
-        
+
         if not analysis_result:
             return jsonify({
                 'error': 'Analysis failed',
                 'status': 'error'
             }), 500
-        
+
         # Add metadata
         response_data = {
             'status': 'success',
@@ -70,11 +72,12 @@ def analyze_text():
             'input_length': len(text),
             'recommendations': generate_recommendations(analysis_result['risk_level'])
         }
-        
-        logger.info(f"Analysis completed for text length: {len(text)}, Risk: {analysis_result['risk_level']}")
-        
+
+        logger.info(
+            f"Analysis completed for text length: {len(text)}, Risk: {analysis_result['risk_level']}")
+
         return jsonify(response_data)
-        
+
     except Exception as e:
         logger.error(f"Analysis error: {str(e)}")
         return jsonify({
@@ -82,19 +85,20 @@ def analyze_text():
             'status': 'error'
         }), 500
 
+
 @app.route('/api/resources/crisis', methods=['GET'])
 def get_crisis_help():
     """Get crisis intervention resources - Kenya focused."""
     try:
         crisis_resources = get_kenya_crisis_resources()
-        
+
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
             'country': 'Kenya',
             'resources': crisis_resources
         })
-        
+
     except Exception as e:
         logger.error(f"Crisis resources error: {str(e)}")
         return jsonify({
@@ -102,19 +106,20 @@ def get_crisis_help():
             'status': 'error'
         }), 500
 
+
 @app.route('/api/resources/mental-health', methods=['GET'])
 def get_mental_health_help():
     """Get mental health resources - Kenya focused."""
     try:
         resources = get_kenya_mental_health_resources()
-        
+
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
             'country': 'Kenya',
             'resources': resources
         })
-        
+
     except Exception as e:
         logger.error(f"Mental health resources error: {str(e)}")
         return jsonify({
@@ -122,19 +127,20 @@ def get_mental_health_help():
             'status': 'error'
         }), 500
 
+
 @app.route('/api/resources/safety-planning', methods=['GET'])
 def get_safety_help():
     """Get safety planning resources - Kenya focused."""
     try:
         safety_resources = get_kenya_safety_planning_resources()
-        
+
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
             'country': 'Kenya',
             'resources': safety_resources
         })
-        
+
     except Exception as e:
         logger.error(f"Safety planning resources error: {str(e)}")
         return jsonify({
@@ -142,28 +148,29 @@ def get_safety_help():
             'status': 'error'
         }), 500
 
+
 @app.route('/api/batch-analyze', methods=['POST'])
 def batch_analyze():
     """Analyze multiple texts in batch for research purposes."""
     try:
         data = request.get_json()
-        
+
         if not data or 'texts' not in data:
             return jsonify({
                 'error': 'texts field is required',
                 'status': 'error'
             }), 400
-        
+
         texts = data['texts']
-        
+
         if not isinstance(texts, list) or len(texts) > 50:  # Limit batch size
             return jsonify({
                 'error': 'texts must be a list with maximum 50 items',
                 'status': 'error'
             }), 400
-        
+
         results = []
-        
+
         for i, text in enumerate(texts):
             if text and text.strip():
                 try:
@@ -186,11 +193,12 @@ def batch_analyze():
                         'text_preview': text[:100] + "..." if len(text) > 100 else text,
                         'error': f'Analysis error: {str(e)}'
                     })
-        
+
         # Generate summary statistics
         successful_analyses = [r for r in results if 'analysis' in r]
-        risk_levels = [r['analysis']['risk_level'] for r in successful_analyses]
-        
+        risk_levels = [r['analysis']['risk_level']
+                       for r in successful_analyses]
+
         summary = {
             'total_texts': len(texts),
             'successful_analyses': len(successful_analyses),
@@ -202,20 +210,21 @@ def batch_analyze():
             },
             'average_sentiment': sum(r['analysis']['overall_sentiment'] for r in successful_analyses) / len(successful_analyses) if successful_analyses else 0
         }
-        
+
         return jsonify({
             'status': 'success',
             'timestamp': datetime.now().isoformat(),
             'results': results,
             'summary': summary
         })
-        
+
     except Exception as e:
         logger.error(f"Batch analysis error: {str(e)}")
         return jsonify({
             'error': 'Internal server error',
             'status': 'error'
         }), 500
+
 
 def generate_recommendations(risk_level):
     """Generate appropriate recommendations based on risk level."""
@@ -263,8 +272,9 @@ def generate_recommendations(risk_level):
             ]
         }
     }
-    
+
     return recommendations.get(risk_level, recommendations['Low'])
+
 
 @app.route('/api/documentation', methods=['GET'])
 def api_documentation():
@@ -321,8 +331,9 @@ def api_documentation():
             'Rate limiting may apply in production'
         ]
     }
-    
+
     return jsonify(docs)
+
 
 @app.errorhandler(404)
 def not_found(error):
@@ -340,12 +351,14 @@ def not_found(error):
         ]
     }), 404
 
+
 @app.errorhandler(500)
 def internal_error(error):
     return jsonify({
         'error': 'Internal server error',
         'status': 'error'
     }), 500
+
 
 if __name__ == '__main__':
     print("🇰🇪 Starting WellNet Kenya Mental Health API Server...")
